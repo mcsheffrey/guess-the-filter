@@ -6,12 +6,12 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
+        <title>Guess the Filter - See if you can accurately guess all of the Instagram filters</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
+        <link rel="stylesheet" type="text/css" href="//cloud.typography.com/7658032/748622/css/fonts.css" />
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
@@ -25,30 +25,45 @@
           js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=422145034512279";
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
-        <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+       
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
         <!-- Add your site or application content here -->
         <header>
-            Guess the Instagram filter
-            <div id="score">
-            0 / 0
-        </div>
+            <div class="row clearfix">
+              <h1 class="title">Guess the filter</h1>
+              <div id="score" class="score">0 / 0</div>
+            </div>
         </header>   
 
-        <div class="row">
+        <div class="main">
             <div class="wrap">
 
-            <div id="container"></div>
-             </div>
+              <div id="container"></div>
+              <span class="seperator">or</span>
+            </div>
+
          </div>
 
+        <div id="output">
+        </div>
+
          <footer>
-             <p>This website uses the Instagram™ API and is not endorsed or certified by Instagram or Burbn, inc. All Instagram™ logos and trademarks displayed on this website are proprty of Burbn, Inc.</p>
-             <div class="fb-like" data-href="http://guessthefilter.com" data-width="450" data-layout="button_count" data-show-faces="false" data-send="false"></div>
+            <div class="row clearfix">
+              <nav class="footer-nav">
+                <a href="/about/" title="About">About</a>
+                <a href="/legal/" title="Legal">Legal</a>
+              </nav>
+              <nav class="social-nav">
+                <div class="fb-like" data-href="http://guessthefilter.com" data-width="450" data-layout="button_count" data-show-faces="false" data-send="false"></div>
+                <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+              </nav>
+            </div>
+            <div class="row clearfix">
+              <p>This website uses the Instagram™ API and is not endorsed or certified by Instagram or Burbn, inc. All Instagram™ logos and trademarks displayed on this website are proprty of Burbn, Inc.</p>
+            </div>
          </footer>
 
         <script id="score-template" type="text/x-handlebars-template">
@@ -59,8 +74,8 @@
           {{#each this}}
           <div class="photo-container" style="z-index: {{photo_index}}">
             <div class="photo" style="background-image: url({{img_url}});" id="{{id}}" height="612" width="612" />
-            <span class="filter-btn" id="option-1" data-filter="{{fake_filter}}">{{fake_filter}}</span>
-            <span class="filter-btn" id="option-2" data-filter="{{filter}}">{{filter}}</span>
+            <span class="filter-btn" id="option-1" data-filter="{{fake_filter}}" data-direction="left"><div class="filter-btn-inner">{{fake_filter}}</div></span>
+            <span class="filter-btn" id="option-2" data-filter="{{filter}}" data-direction="right"><div class="filter-btn-inner">{{filter}}</div></span>
           </div>
           
           {{/each}}
@@ -68,9 +83,14 @@
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="js/vendor/react.js"></script>
+        <script src="js/vendor/JSXTransformer.js"></script>
         <script src="js/vendor/handlebars.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
+        <script type="text/jsx" src="js/app.js"></script>
+        <!-- Twitter widget -->
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

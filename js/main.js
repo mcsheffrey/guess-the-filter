@@ -20,8 +20,14 @@ var Utils = {
   }
 };
 
+
+
 var GuessTheFilter = {
 
+	/**
+	 * [init description]
+	 * @return {[type]} [description]
+	 */
 	init: function() {
 		var self = this;
 
@@ -40,7 +46,7 @@ var GuessTheFilter = {
 
 		// Retrieve medias from local storage to check against
 		GuessTheFilter.previousMedias = Utils.store('medias');
-		console.log(GuessTheFilter.previousMedias);
+		// console.log(GuessTheFilter.previousMedias);
 
 		// Fetch first medias
 		this.fetch();
@@ -48,6 +54,10 @@ var GuessTheFilter = {
 		$('body').on('click', '.filter-btn', this.makeFilterSelection);
 	},
 
+	/**
+	 * [fetch description]
+	 * @return {[type]} [description]
+	 */
 	fetch: function() {
 		var self = this;
 
@@ -58,6 +68,13 @@ var GuessTheFilter = {
 		});
 	},
 
+	/**
+	 * [demoCallback description]
+	 * @param  {[type]} results    [description]
+	 * @param  {[type]} textStatus [description]
+	 * @param  {[type]} xhr        [description]
+	 * @return {[type]}            [description]
+	 */
 	demoCallback: function(results, textStatus, xhr) {
 
 		var self = this,
@@ -77,38 +94,40 @@ var GuessTheFilter = {
 					// Check against previousMedia array to make sure media hasn't already been seen
 					console.log(GuessTheFilter.checkAgainstPreviousMedias(results.data[i]));
 					
-					if (GuessTheFilter.checkAgainstPreviousMedias || GuessTheFilter.checkAgainstPreviousMedias(results.data[i])) {
+					// if (GuessTheFilter.checkAgainstPreviousMedias || GuessTheFilter.checkAgainstPreviousMedias(results.data[i])) {
 
-					// Add random filter if photo
-					if (results.data[i].type === "image") {
-						randomFilter = GuessTheFilter.pickRandomFilter(GuessTheFilter.igPhotoFilters, results.data[i].filter);
-					}
+						// Add random filter if photo
+						if (results.data[i].type === "image") {
+							randomFilter = GuessTheFilter.pickRandomFilter(GuessTheFilter.igPhotoFilters, results.data[i].filter);
+						}
 
-					// add random filter if video
-					if (results.data[i].type === "video") {
-						randomFilter = GuessTheFilter.pickRandomFilter(GuessTheFilter.igVideoFilters, results.data[i].filter);
-					}
+						// add random filter if video
+						if (results.data[i].type === "video") {
+							randomFilter = GuessTheFilter.pickRandomFilter(GuessTheFilter.igVideoFilters, results.data[i].filter);
+						}
 
-					console.log(randomFilter);
-					
+						console.log(randomFilter);
+						
 
-					GuessTheFilter.currentFilter = results.data[i].filter;
+						GuessTheFilter.currentFilter = results.data[i].filter;
 
-					GuessTheFilter.photos.push({
-						img_url: results.data[i].images.standard_resolution.url,
-						filter: results.data[i].filter,
-						fake_filter: randomFilter,
-						photo_index: GuessTheFilter.photoIndex,
-						media_id: results.data[i].id
-					});
+						GuessTheFilter.photos.push({
+							img_url: results.data[i].images.standard_resolution.url,
+							filter: results.data[i].filter,
+							fake_filter: randomFilter,
+							photo_index: GuessTheFilter.photoIndex,
+							media_id: results.data[i].id
+						});
 
-					console.log(GuessTheFilter.photoIndex);
-					
-					
-					// decrement photo index to place new content behind old content;
-					GuessTheFilter.photoIndex--;
+						console.log('push', GuessTheFilter.photos);
+						
+						console.log(GuessTheFilter.photoIndex);
+						
+						
+						// decrement photo index to place new content behind old content;
+						GuessTheFilter.photoIndex--;
 
-					};
+					// };
 				}
 			}; // end for loop
 
@@ -116,7 +135,7 @@ var GuessTheFilter = {
 
 			// Combine previous medias with newly loaded medis
 			var combinedMedias = GuessTheFilter.previousMedias.concat(GuessTheFilter.photos)
-			console.log(combinedMedias	);
+			// console.log(combinedMedias	);
 			
 
 			// Store already viewed medias in local storag so we don't see them again
@@ -130,22 +149,27 @@ var GuessTheFilter = {
 
 			var template = Handlebars.compile( $('#photos-template').html() );
 
-			$('#container').append( template( GuessTheFilter.photos ) );	
+			$('#container').html( template( GuessTheFilter.photos ) );	
 
 		}
 		
 	},
 
+	/**
+	 * [checkAgainstPreviousMedias description]
+	 * @param  {[type]} media [description]
+	 * @return {[type]}       [description]
+	 */
 	checkAgainstPreviousMedias: function(media) {
-		console.log(GuessTheFilter.previousMedias);
+		// console.log(GuessTheFilter.previousMedias);
 		
 		for (var i = 0; i < GuessTheFilter.previousMedias.length; i++) {
 
 			// If any of the new media objects we've fetched matches an old media object we don't want to push it to the new array
-			console.log(GuessTheFilter.previousMedias[i])
-			console.log(media);
+			// console.log(GuessTheFilter.previousMedias[i].media_id)
+			// console.log(media.id);
 			
-			if (GuessTheFilter.previousMedias[i] === media) {
+			if (GuessTheFilter.previousMedias[i].media_id === media.id) {
 				return false;
 			}
 
@@ -153,6 +177,12 @@ var GuessTheFilter = {
 		};
 	},
 
+	/**
+	 * Selects random filter from array
+	 * @param  {Array} Array of filters
+	 * @param  {String} Exception filter name
+	 * @return {String} random filter name
+	 */
 	pickRandomFilter: function(items, exceptionItem) {
 		var item = items[Math.floor(Math.random()*items.length)];
 
@@ -164,6 +194,10 @@ var GuessTheFilter = {
 		}
 	},
 
+	/**
+	 * [makeFilterSelection description]
+	 * @return {[type]} [description]
+	 */
 	makeFilterSelection: function() {
 
 		if ($(this).data('filter') == GuessTheFilter.currentFilter) {
@@ -173,7 +207,7 @@ var GuessTheFilter = {
 		GuessTheFilter.curentScore.totalAnswers++;
 
 		GuessTheFilter.updateScore(GuessTheFilter.curentScore.correctAnswers, GuessTheFilter.curentScore.totalAnswers);
-		GuessTheFilter.updateMedias();
+		GuessTheFilter.updateMedias($(this).data('direction'));
 
 		if (GuessTheFilter.photos.length < 4) {
 			console.log('fetch');
@@ -183,17 +217,33 @@ var GuessTheFilter = {
 
 	},
 
+	/**
+	 * [updateScore description]
+	 * @param  {[type]} correctAnswers [description]
+	 * @param  {[type]} totalAnswers   [description]
+	 * @return {[type]}                [description]
+	 */
 	updateScore: function(correctAnswers, totalAnswers) {
 
 		var template = Handlebars.compile( $('#score-template').html() );
 
 		$('#score').html( template( GuessTheFilter.curentScore ) );	
 
+		$('#score').addClass('animate-flash');
+
+		setTimeout(function() {
+			$('#score').removeClass('animate-flash');
+		}, 500);
+
 	},
 
-	updateMedias: function() {
+	/**
+	 * [updateMedias description]
+	 * @return {[type]} [description]
+	 */
+	updateMedias: function(direction) {
 		// Remove first item
-		GuessTheFilter.photos.splice(0, 1);
+		GuessTheFilter.photos = GuessTheFilter.photos.slice(1);
 
 		console.log(GuessTheFilter.photos);
 		
@@ -202,8 +252,21 @@ var GuessTheFilter = {
 
 		console.log(GuessTheFilter.currentFilter);
 		
+		console.log('removed', $('#container').find('.photo-container:first-child'));
 
-		$('#container').find('.photo-container:first-child').remove();
+		var $firstChild = $('#container').find('.photo-container:first-child');
+
+		if (direction === 'left') {
+			$firstChild.addClass('animate-fly-out-left');
+		} else {
+			$firstChild.addClass('animate-fly-out-right');
+		}
+
+		setTimeout(function() {
+			$firstChild.remove();
+		}, 200);
+		
+		
 
 
 
