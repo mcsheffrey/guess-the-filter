@@ -1,0 +1,55 @@
+header {
+    background: rgb(60,65,76); /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(60,65,76,1) 0%, rgba(57,62,73,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(60,65,76,1)), color-stop(100%,rgba(57,62,73,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(60,65,76,1) 0%,rgba(57,62,73,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(60,65,76,1) 0%,rgba(57,62,73,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(60,65,76,1) 0%,rgba(57,62,73,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom, rgba(60,65,76,1) 0%,rgba(57,62,73,1) 100%); /* W3C */
+    border-bottom: 1px solid #151517;
+    box-shadow: 0 0 3px rgba(0,0,0,.3);
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 2px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.title {
+    color: #cdced1;
+    float: left;
+    font-family: 'Billabong';
+    text-shadow: 0 1px 1px rgba(0,0,0,.2);
+    margin: 8px 0 0;
+}
+
+.score {
+    background: -moz-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.1)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 100%); /* IE10+ */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 100%); /* W3C */
+    box-shadow: 0 1px 1px 0 rgba(255,255,255,.1), 0 -1px 1px 0 rgba(0,0,0,.3);
+    border-radius: 2em;
+    color: #cdced1;
+    display: inline-block;
+    font-weight: 700;
+    float: right;
+    margin-top: 10px;
+    min-width: 45px;
+    padding: 5px 15px;
+    text-shadow: 0 1px 1px rgba(0,0,0,.2);
+    -webkit-transition: color ease-in 200ms;
+       -moz-transition: color ease-in 200ms;
+        -ms-transition: color ease-in 200ms;
+         -o-transition: color ease-in 200ms;
+            transition: color ease-in 200ms;
+    
+}
+
+.score.animate-flash {
+    color: #fff;
+}
