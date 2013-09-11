@@ -63,12 +63,12 @@
     opacity: 1;
 }
 
-.wrap div:nth-of-type(2) {
+.wrap .photo-container:nth-of-type(2) {
     -webkit-transform: rotate(-2deg);
     opacity: 1;
 }
 
-.wrap div:nth-of-type(3) {
+.wrap .photo-container:nth-of-type(3) {
     -webkit-transform: rotate(2deg);
     opacity: 1;
 }
@@ -88,6 +88,12 @@
             box-shadow: 0 1px 1px 0 #b8b8b8, 0 0 5px rgba(0,0,0,.3);
 }
 
+.images-wrapper {
+    height: 635px;
+    display: inline-block;
+    width: 100%;
+}
+
 .filter-btn {
     background: -moz-linear-gradient(top, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.05)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
@@ -97,11 +103,9 @@ background: -ms-linear-gradient(top, rgba(0,0,0,0.05) 0%,rgba(0,0,0,0) 100%); /*
 background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%,rgba(0,0,0,0) 100%); /* W3C */
     box-shadow: 0 1px 1px rgba(255,255,255,.3), 0 -1px 1px rgba(0,0,0,.1);
     cursor: pointer;
+    display: inline-block;
     border-radius: 3em;
     padding: 10px 15px;
-    position: absolute;
-    top: 685px;
-    opacity: 0;
     -webkit-transition: all ease-in 1s;
        -moz-transition: all ease-in 1s;
         -ms-transition: all ease-in 1s;
@@ -122,6 +126,7 @@ background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%,rgba(0,0,0,0) 100%); 
     border: 1px solid #ccd6de;
     border-radius: 2em;
     color: #a4baca;
+    display: inline-block;
     font-size: 16px;
     font-weight: 700;
     letter-spacing: .1em;

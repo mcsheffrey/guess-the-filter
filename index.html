@@ -30,22 +30,6 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <header>
-            <div class="row clearfix">
-              <h1 class="title">Guess the filter</h1>
-              <div id="score" class="score">0 / 0</div>
-            </div>
-        </header>   
-
-        <div class="main">
-            <div class="wrap">
-
-              <div id="container"></div>
-              <span class="seperator">or</span>
-            </div>
-
-         </div>
-
         <div id="output">
         </div>
 
@@ -71,7 +55,7 @@
 
         <script id="photos-template" type="text/x-handlebars-template">
           {{#each this}}
-          <div class="photo-container" style="z-index: {{photo_index}}">
+          <div class="photo-container" style="zIndex: {{photo_index}}">
             <div class="photo" style="background-image: url({{img_url}});" id="{{id}}" height="612" width="612" />
             <span class="filter-btn" id="option-1" data-filter="{{fake_filter}}" data-direction="left"><div class="filter-btn-inner">{{fake_filter}}</div></span>
             <span class="filter-btn" id="option-2" data-filter="{{filter}}" data-direction="right"><div class="filter-btn-inner">{{filter}}</div></span>
@@ -86,7 +70,6 @@
         <script src="js/vendor/JSXTransformer.js"></script>
         <script src="js/vendor/handlebars.js"></script>
         <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
         <script type="text/jsx" src="js/app.js"></script>
         <!-- Twitter widget -->
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>

@@ -1,3 +1,5 @@
+@import 'bourbon/bourbon';
+
 // CSS normalize.css reset
 @import "modules/normalize";
 
@@ -7,7 +9,9 @@
 @import "partials/typography";
 
 html,
-body {
+body,
+#output,
+.container {
 	height: 100%;
 }
 
