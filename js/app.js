@@ -70,7 +70,7 @@ $("#scoreInput").keypress(function (e) {
     userScoreRef.setWithPriority({ name:name, score:newScore }, newScore);
   }
 });
-  
+
 
 var Media = React.createClass({
   render: function() {
@@ -152,7 +152,8 @@ var GuessTheFilter = React.createClass({
     var self = this,
         randomFilter,
         previousMedias,
-        photos = [];
+        photos = [],
+        sortedFilters = [];
 
     console.log('results',results);
 
@@ -186,16 +187,18 @@ var GuessTheFilter = React.createClass({
               randomFilter = this.pickRandomFilter(this.config.igVideoFilters, results.data[i].filter);
               console.log('video', randomFilter);
             }
-
-            console.log(randomFilter);
             
+            sortedFilters = [results.data[i].filter, randomFilter];
+            
+            sortedFilters.sort();
 
+            console.log(sortedFilters);
             
 
             photos.push({
               img_url: results.data[i].images.standard_resolution.url,
-              filter: results.data[i].filter,
-              fake_filter: randomFilter,
+              filters: sortedFilters,
+              correct_filter: results.data[i].filter,
               photo_index: this.config.photoIndex,
               media_id: results.data[i].id,
               classTransition: ''
@@ -231,16 +234,17 @@ var GuessTheFilter = React.createClass({
       
       this.setState({data: this.state.data.concat(photos)});
 
-      this.setState({current: this.state.data[0].filter});
+      this.setState({current: this.state.data[0].filters});
 
-      this.setState({filter: [photos[0].filter, photos[0].fake_filter]});
+      this.setState({filters: photos[0].filters});
 
     }
     
   },
 
   /**
-   * [checkAgainstPreviousMedias description]
+   * Loop through fetched media ids and check them against media ids saved in localstorage, 
+   * prevents user from seeing same media twice
    * @param  {[type]} media [description]
    * @return {[type]}       [description]
    */
@@ -290,8 +294,7 @@ var GuessTheFilter = React.createClass({
 	getInitialState: function() {
     return {
       data: [],
-      filter: [],
-      current: '',
+      filters: [],
       score: {
         correct: 0,
         total: 0
@@ -304,17 +307,20 @@ var GuessTheFilter = React.createClass({
     // setInterval(this.loadMediaFromServer, this.props.pollInterval);
   },
   makeSelection: function(filter) {
-    var self = this;
+    var self = this,
+        sortedFilters = [];
 
     console.log('event', this);
     console.log($(this.getDOMNode()));
     
     
     console.log(filter);
-    console.log(this.state.current);
+    console.log(self.state.data[0].correct_filter);
+    
+    
 
     // If correct answer increment score
-    if (filter === this.state.current) {
+    if (filter === this.state.data[0].correct_filter) {
 
       this.state.score.correct++;
 
@@ -338,9 +344,7 @@ var GuessTheFilter = React.createClass({
         data: self.state.data.slice(1)
       });
 
-      self.setState({current: self.state.data[0].filter});
-
-      self.setState({filter: [self.state.data[0].filter, self.state.data[0].fake_filter]});
+      self.setState({filters: self.state.data[0].filters});
 
       if (self.state.data.length < 4) {
         
@@ -352,7 +356,7 @@ var GuessTheFilter = React.createClass({
   },
   render: function() {
     var self = this,
-        filterNodes = this.state.filter.map(function (filter) {
+        filterNodes = this.state.filters.map(function (filter) {
       
       return (
         <FilterChooser filter={filter} onDestroy={self.makeSelection.bind(this, filter)}/>
