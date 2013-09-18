@@ -2,7 +2,7 @@
 
 var Media = React.createClass({
   render: function() {
-    console.log('this', this._domIndex);
+    console.log('this', this);
     
     return (
       React.DOM.div({
@@ -34,7 +34,7 @@ var Score = React.createClass({
 var FilterChooser = React.createClass({
   render: function() {
       return (
-        <a class="btn filter-btn" onClick={this.props.onDestroy}>
+        <a class="btn filter-btn" onClick={this.props.onMakeSelection}>
           <span class="filter-btn-inner">{this.props.filter}</span>
         </a>
       );
@@ -237,15 +237,6 @@ var GuessTheFilter = React.createClass({
     var self = this,
         sortedFilters = [];
 
-    console.log('event', this);
-    console.log($(this.getDOMNode()));
-    
-    
-    console.log(filter);
-    console.log(self.state.data[0].correct_filter);
-    
-    
-
     // If correct answer increment score
     if (filter === this.state.data[0].correct_filter) {
 
@@ -255,6 +246,7 @@ var GuessTheFilter = React.createClass({
         transition: 'state-correct fadeIn'
       });
     } else {
+
       this.setState({
         transition: 'state-incorrect fadeIn'
       });
@@ -265,6 +257,14 @@ var GuessTheFilter = React.createClass({
     console.log(this.state);
 
     setTimeout(function() {
+      self.setState({
+        transition: self.state.transition += ' animate-fly-out-right transition-ease-in'
+      });
+    
+    }, 1000);
+
+    setTimeout(function() {
+
       self.state.transition = '';
 
       self.setState({
@@ -277,8 +277,8 @@ var GuessTheFilter = React.createClass({
         
         self.fetch();
       };
-    
-    }, 1000);
+
+    }, 2000);
 
   },
   render: function() {
@@ -286,7 +286,7 @@ var GuessTheFilter = React.createClass({
         filterNodes = this.state.filters.map(function (filter) {
       
       return (
-        <FilterChooser filter={filter} onDestroy={self.makeSelection.bind(this, filter)}/>
+        <FilterChooser filter={filter} onMakeSelection={self.makeSelection.bind(this, filter)}/>
       );
     });
 
