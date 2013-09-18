@@ -53,6 +53,7 @@ var GuessTheFilter = React.createClass({
     previousMedias: []
   },
 
+  // This really needs to get moved into a Backbone model
   fetch: function() {
     var self = this;
 
