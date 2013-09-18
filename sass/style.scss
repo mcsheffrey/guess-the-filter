@@ -9,6 +9,10 @@
 @import "partials/typography";
 @import "partials/transitions";
 
+*, *:before, *:after {
+	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+
 html,
 body,
 #output,
