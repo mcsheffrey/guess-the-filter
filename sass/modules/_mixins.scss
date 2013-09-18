@@ -1,0 +1,24 @@
+// Default font
+@mixin typeface {
+    // From: Better Helvetica Font Stack http://j.mp/9t6O6Z
+    font-family: 'Gotham A', 'Gotham B', "Helvetica", Arial, sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+@mixin clearfix() {
+    // http://nicolasgallagher.com/micro-clearfix-hack/
+    // USAGE: @include clearfix();
+    & {
+        *zoom: 1;
+    }
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}

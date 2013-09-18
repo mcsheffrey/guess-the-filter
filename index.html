@@ -12,9 +12,9 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <link rel="stylesheet" type="text/css" href="//cloud.typography.com/7658032/748622/css/fonts.css" />
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/style.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="https://cdn.firebase.com/v0/firebase.js"></script>
     </head>
     <body>
         <div id="fb-root"></div>
@@ -31,22 +31,7 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <header>
-            <div class="row clearfix">
-              <h1 class="title">Guess the filter</h1>
-              <div id="score" class="score">0 / 0</div>
-            </div>
-        </header>   
-
-        <div class="main">
-            <div class="wrap">
-
-              <div id="container"></div>
-              <span class="seperator">or</span>
-            </div>
-
-         </div>
-
+        <table id="leaderboardTable"></table>
         <div id="output">
         </div>
 
@@ -54,6 +39,7 @@
             <div class="row clearfix">
               <nav class="footer-nav">
                 <a href="/about/" title="About">About</a>
+                <a href="/high-scores/" title="High Scores">High Scores</a>
                 <a href="/legal/" title="Legal">Legal</a>
               </nav>
               <nav class="social-nav">
@@ -66,13 +52,14 @@
             </div>
          </footer>
 
+
         <script id="score-template" type="text/x-handlebars-template">
             {{correctAnswers}} / {{totalAnswers}}
         </script>
 
         <script id="photos-template" type="text/x-handlebars-template">
           {{#each this}}
-          <div class="photo-container" style="z-index: {{photo_index}}">
+          <div class="photo-container" style="zIndex: {{photo_index}}">
             <div class="photo" style="background-image: url({{img_url}});" id="{{id}}" height="612" width="612" />
             <span class="filter-btn" id="option-1" data-filter="{{fake_filter}}" data-direction="left"><div class="filter-btn-inner">{{fake_filter}}</div></span>
             <span class="filter-btn" id="option-2" data-filter="{{filter}}" data-direction="right"><div class="filter-btn-inner">{{filter}}</div></span>
@@ -83,18 +70,18 @@
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="js/vendor/underscore.js"></script>
+        <script src="js/vendor/backbone.js"></script>
+        <script src="js/vendor/backbone-firebase.js"></script>
         <script src="js/vendor/react.js"></script>
         <script src="js/vendor/JSXTransformer.js"></script>
-        <script src="js/vendor/handlebars.js"></script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
         <script type="text/jsx" src="js/app.js"></script>
         <!-- Twitter widget -->
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            var _gaq=[['_setAccount','UA-43968834-1'],['_trackPageview']];
             (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
             g.src='//www.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));
